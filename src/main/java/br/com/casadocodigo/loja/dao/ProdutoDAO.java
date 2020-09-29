@@ -1,14 +1,19 @@
 package br.com.casadocodigo.loja.dao;
 
 import java.math.BigDecimal;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import br.com.casadocodigo.loja.models.Produto;
 import br.com.casadocodigo.loja.models.TipoPreco;
@@ -40,5 +45,14 @@ public class ProdutoDAO {
 	    		+ "where preco.tipo = :tipoPreco", BigDecimal.class);
 	    query.setParameter("tipoPreco", tipoPreco);
 	    return query.getSingleResult();
+	}
+	
+	public List<Produto> relatorioDeProdutos(Calendar dataGeracao){
+		String sql = "select distinct(p) from Produto"
+				+ " p join fetch p.precos where p.dataLancamento >= :dataGeracao";
+		TypedQuery<Produto> query = manager.createQuery(sql, Produto.class);
+		query.setParameter("dataGeracao", dataGeracao);
+		
+		return query.getResultList();
 	}
 }
