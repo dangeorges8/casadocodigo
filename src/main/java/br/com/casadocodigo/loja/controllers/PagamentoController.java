@@ -34,7 +34,8 @@ public class PagamentoController {
 		String uri = "http://book-payment.herokuapp.com/payment";
 		
 		try {
-			String response = restTemplate.postForObject(uri, new DadosPagamento(carrinho.getTotal()), String.class);
+			String response = restTemplate.postForObject
+					(uri, new DadosPagamento(carrinho.getTotal()), String.class);
 			model.addFlashAttribute("message", response);
 			System.out.println(response);
 			
