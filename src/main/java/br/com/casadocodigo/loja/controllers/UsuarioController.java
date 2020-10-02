@@ -23,7 +23,7 @@ import br.com.casadocodigo.loja.validation.UsuarioValidation;
 public class UsuarioController {
 	
 	@Autowired
-	private UsuarioDAO dao;
+	private UsuarioDAO usuarioDao;
 	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
@@ -40,28 +40,22 @@ public class UsuarioController {
 	public ModelAndView gravar(@Valid Usuario usuario, BindingResult result,
 			RedirectAttributes redirectAttributes) {
 		
-		boolean emailRepetido = dao.listarEmails().contains(usuario.getEmail());
-		
-		System.out.println("Lista de Emails: " + dao.listarEmails() 
-			+ " Email form: " + usuario.getEmail() + " Email repetido: " + emailRepetido);
+		boolean emailRepetido = usuarioDao.listarEmails().contains(usuario.getEmail());
 		
 		if(emailRepetido) {
 			result.rejectValue("email", "field.required.usuario.emailRepetido");;
-		} 
-		if(result.hasErrors()) {
+		} else if(result.hasErrors()) {
 			return form(usuario);
 		} 
 		
-		dao.gravar(usuario);
-		
+		usuarioDao.gravar(usuario);
 		redirectAttributes.addFlashAttribute("message", "Usuário cadastrado com sucesso");
-		
 		return new ModelAndView("redirect:/usuarios");
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView listar() {
-		List<Usuario> usuarios = dao.listar();
+		List<Usuario> usuarios = usuarioDao.listar();
 		ModelAndView modelAndView = new ModelAndView("usuarios/lista");
 		modelAndView.addObject("usuarios", usuarios);
 		return modelAndView;

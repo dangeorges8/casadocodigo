@@ -19,11 +19,12 @@ public class UsuarioValidation implements Validator {
 		ValidationUtils.rejectIfEmpty(errors, "email", "field.required.usuario.email");
 		
 		Usuario usuario = (Usuario) target;
-		if(usuario.getSenha().length() < 5) {
+		int caracteresEmail = usuario.getSenha().length();
+		boolean senhaDiferente = !usuario.getSenha().equals(usuario.getSenhaRepetida());
+				
+		if(caracteresEmail < 5) {
 			errors.rejectValue("senha", "field.required.usuario.senha.caracteres");
-		} 
-		
-		if(!usuario.getSenha().equals(usuario.getSenhaRepetida())) {
+		} else if(senhaDiferente) {
 			errors.rejectValue("senha", "field.required.usuario.senhaRepetida.diferente");
 		}
 	}
