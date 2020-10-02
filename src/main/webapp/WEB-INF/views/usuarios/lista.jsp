@@ -19,11 +19,19 @@
 			<tr>
 				<th>Nome</th>
 				<th>E-mail</th>
+				<th>Roles</th>
+				<th></th>
 			</tr>
 			<c:forEach items="${usuarios}" var="usuario">
 				<tr>
 					<td>${usuario.nome}</td>
 					<td>${usuario.email}</td>
+					<td>
+						<c:forEach items="${usuario.roles}" var="roles">
+							${roles.nome}
+						</c:forEach>
+					</td>
+					<td><a href="${contextPath}usuarios/roles"><img alt="Adicionar" src="${contextPath}resources/imagens/adicionar.png"></a></td>
 				</tr>
 			</c:forEach>
 		</table>
