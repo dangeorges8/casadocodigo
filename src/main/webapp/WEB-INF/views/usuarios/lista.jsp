@@ -9,8 +9,12 @@
 <tags:pageTemplate titulo="Livros de Java, Android, iPhone, Ruby, PHP e muito mais ....">
 
 	<section id="index-section" class="container middle">
+		<br>
 		<a href="${contextPath}usuarios/form">Novo usuário</a>
 		<h2>Lista de Usuários</h2>
+		
+		<p>${message}</p>
+		
 		<table>
 			<tr>
 				<th>Nome</th>
