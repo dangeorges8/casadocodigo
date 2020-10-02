@@ -18,9 +18,15 @@ public class UsuarioValidation implements Validator {
 		ValidationUtils.rejectIfEmpty(errors, "nome", "field.required");
 		ValidationUtils.rejectIfEmpty(errors, "email", "field.required");
 		ValidationUtils.rejectIfEmpty(errors, "senha", "field.required");
+		ValidationUtils.rejectIfEmpty(errors, "senhaRepetida", "field.required");
 		
 		Usuario usuario = (Usuario) target;
+		if(usuario.getSenha().length() < 5) {
+			errors.rejectValue("senha", "field.required");
+		} 
+		
+		if(!usuario.getSenha().equals(usuario.getSenhaRepetida())) {
+			errors.rejectValue("senha", "field.required");
+		}
 	}
-	
-	
 }

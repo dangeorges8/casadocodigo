@@ -23,17 +23,17 @@
 				</div>
 				<div class="form-group">
 					<label>E-mail</label>
-					<form:textarea path="email" cssClass="form-control" />
+					<form:textarea type="email" path="email" cssClass="form-control" />
 					<form:errors path="email" />
 				</div>
 				<div class="form-group">
 					<label>Senha</label>
-					<form:input path="senha" cssClass="form-control" />
+					<form:input type="password" path="senha" cssClass="form-control" />
 					<form:errors path="senha" />
 				</div>
 				<div class="form-group">
 					<label>Senha Repetida</label>
-					<form:input path="senha" cssClass="form-control" />
+					<form:input type="password" path="senhaRepetida" cssClass="form-control" />
 					<form:errors path="senha" />
 				</div>
 				<button type="submit" class="btn btn-primary">Cadastrar</button>

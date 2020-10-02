@@ -39,15 +39,32 @@ public class UsuarioController {
 	@RequestMapping(value = "/form", method = RequestMethod.POST)
 	public ModelAndView gravar(@Valid Usuario usuario, BindingResult result,
 			RedirectAttributes redirectAttributes) {
+		
+		boolean emailRepetido = dao.listarEmails().contains(usuario.getEmail());
+		
+		System.out.println("Lista de Emails: " + dao.listarEmails() 
+			+ " Email form: " + usuario.getEmail() + " Email repetido: " + emailRepetido);
+		
+		if(emailRepetido) {
+			result.rejectValue("email", "field.required");;
+		} 
 		if(result.hasErrors()) {
 			return form(usuario);
-		}
+		} 
 		
 		dao.gravar(usuario);
 		
 		redirectAttributes.addFlashAttribute("message", "Usuário cadastrado com sucesso");
 		
-		return new ModelAndView("redirect:usuarios");
+		return new ModelAndView("redirect:/usuarios");
+	}
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public ModelAndView listar() {
+		List<Usuario> usuarios = dao.listar();
+		ModelAndView modelAndView = new ModelAndView("usuarios/lista");
+		modelAndView.addObject("usuarios", usuarios);
+		return modelAndView;
 	}
 	
 }
