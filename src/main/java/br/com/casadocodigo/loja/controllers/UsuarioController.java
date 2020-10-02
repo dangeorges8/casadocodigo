@@ -46,7 +46,7 @@ public class UsuarioController {
 			+ " Email form: " + usuario.getEmail() + " Email repetido: " + emailRepetido);
 		
 		if(emailRepetido) {
-			result.rejectValue("email", "field.required");;
+			result.rejectValue("email", "field.required.usuario.emailRepetido");;
 		} 
 		if(result.hasErrors()) {
 			return form(usuario);

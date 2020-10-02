@@ -15,18 +15,16 @@ public class UsuarioValidation implements Validator {
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		ValidationUtils.rejectIfEmpty(errors, "nome", "field.required");
-		ValidationUtils.rejectIfEmpty(errors, "email", "field.required");
-		ValidationUtils.rejectIfEmpty(errors, "senha", "field.required");
-		ValidationUtils.rejectIfEmpty(errors, "senhaRepetida", "field.required");
+		ValidationUtils.rejectIfEmpty(errors, "nome", "field.required.usuario.nome");
+		ValidationUtils.rejectIfEmpty(errors, "email", "field.required.usuario.email");
 		
 		Usuario usuario = (Usuario) target;
 		if(usuario.getSenha().length() < 5) {
-			errors.rejectValue("senha", "field.required");
+			errors.rejectValue("senha", "field.required.usuario.senha.caracteres");
 		} 
 		
 		if(!usuario.getSenha().equals(usuario.getSenhaRepetida())) {
-			errors.rejectValue("senha", "field.required");
+			errors.rejectValue("senha", "field.required.usuario.senhaRepetida.diferente");
 		}
 	}
 }

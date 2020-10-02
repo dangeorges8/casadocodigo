@@ -17,26 +17,26 @@
 			<form:form action="${s:mvcUrl('UC#gravar').build() }" method="post"
 				commandName="usuario" enctype="multipart/form-data">
 				<div class="form-group">
-					<label>Nome</label>
-					<form:input path="nome" cssClass="form-control" />
+					<label><strong><fmt:message key="cadastro.nome"/></strong></label>
+					<form:input path="nome" class="form-control-sm" />
 					<form:errors path="nome" />
 				</div>
 				<div class="form-group">
-					<label>E-mail</label>
-					<form:textarea type="email" path="email" cssClass="form-control" />
+					<label><strong>E-mail</strong></label>
+					<form:input type="email" path="email" class="form-control-sm" />
 					<form:errors path="email" />
 				</div>
 				<div class="form-group">
-					<label>Senha</label>
-					<form:input type="password" path="senha" cssClass="form-control" />
+					<label><strong><fmt:message key="cadastro.senha"/></strong></label>
+					<form:input type="password" path="senha" class="form-control-sm" />
 					<form:errors path="senha" />
 				</div>
 				<div class="form-group">
-					<label>Senha Repetida</label>
-					<form:input type="password" path="senhaRepetida" cssClass="form-control" />
+					<label><strong><fmt:message key="cadastro.senhaRepetida"/></strong></label>
+					<form:input type="password" path="senhaRepetida" class="form-control-sm" />
 					<form:errors path="senha" />
 				</div>
-				<button type="submit" class="btn btn-primary">Cadastrar</button>
+				<button type="submit" class="btn btn-primary"><fmt:message key="cadastro.cadastrar"/></button>
 			</form:form>
 		</div>
 	</section>

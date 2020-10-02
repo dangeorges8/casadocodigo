@@ -5,6 +5,7 @@
 <%@ attribute name="extraScripts" fragment="true" %>
 
 <c:url value="/" var="contextPath" />
+<c:url value="/resources/css" var="cssPath" />
 
 <!DOCTYPE html>
 <html>
@@ -28,6 +29,7 @@
 		<link href="${contextPath}resources/css/produtos.css" rel="stylesheet" type="text/css" media="all" />
 		<link rel="canonical" href="http://www.casadocodigo.com.br/" />
 		<link href="${contextPath}resources/css/book-collection.css" rel="stylesheet" type="text/css" media="all" />
+    	<link rel="stylesheet" href="${cssPath}/bootstrap-theme.min.css" />
 	</head>
 	<body class="${bodyClass}">
 
