@@ -12,6 +12,10 @@ O projeto usa MySQL e deve existir já o banco `casadocodigo` (sem senha). O JPA
 
 	mvn clean package
 
+ Se houver erros ao compilar na linha de comando, por conta das classes de teste que podem envolver configurações no banco de dados, use:
+ 
+ 	mvn clean package -Dmaven.test.skip=true
+
 ## Profile DEV
 
 O projeto sobe automaticamente ativando o profile "dev". Isso foi configurado através da classe ServletSpringMVC no método onStartup(..).
@@ -28,7 +32,11 @@ Ao rodar no Eclipse pelo  Tomcat acesse:
 
 	http://localhost:8080/casadocodigo
 	
-Execute a "URL Mágica" para cadastrar produtos e um usuario padrão (Login: admin@casadocodigo.com.br, Senha: 123456)	
+Execute a "URL Mágica" para cadastrar produtos e um usuario padrão (Login: admin@casadocodigo.com.br, Senha: 123456)
+
+Para não ser necessário rodar a "URL Mágica" toda vez que o servidor for reiniciado basta trocar a palavra "create" por "update" no método additionalProperties da classe JPAConfiguration, ficando assim:
+
+	properties.setProperty("hibernate.hbm2ddl.auto", "update");
 
 ## SQL para geração das tables
 
