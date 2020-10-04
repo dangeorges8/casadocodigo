@@ -24,6 +24,7 @@ public class Usuario implements UserDetails {
 	private String email;
 	private String senha;
 	private String nome;
+
 	@Transient
 	private String senhaRepetida;
 
@@ -142,17 +143,12 @@ public class Usuario implements UserDetails {
 				return false;
 		} else if (!roles.equals(other.roles))
 			return false;
-		if (senha == null) {
-			if (other.senha != null)
-				return false;
-		} else if (!senha.equals(other.senha))
-			return false;
-		if (senhaRepetida == null) {
-			if (other.senhaRepetida != null)
-				return false;
-		} else if (!senhaRepetida.equals(other.senhaRepetida))
-			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Usuario [email=" + email + ", nome=" + nome + ", roles=" + roles + "]";
 	}
 
 }

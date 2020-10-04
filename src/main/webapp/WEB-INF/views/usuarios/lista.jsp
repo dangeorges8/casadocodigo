@@ -27,11 +27,12 @@
 					<td>${usuario.nome}</td>
 					<td>${usuario.email}</td>
 					<td>
-						<c:forEach items="${usuario.roles}" var="roles">
+						<c:forEach items="${usuario.roles}" var="roles" varStatus="loop">
 							${roles.nome}
+							<c:if test="${!loop.last}">,</c:if>
 						</c:forEach>
 					</td>
-					<td><a href="${contextPath}usuarios/roles"><img alt="Adicionar" src="${contextPath}resources/imagens/adicionar.png"></a></td>
+					<td><a href="${s:mvcUrl('UC#editarRoles').arg(0, usuario.email).build()}"><img alt="Editar" src="${contextPath}resources/imagens/editar.png"></a></td>
 				</tr>
 			</c:forEach>
 		</table>

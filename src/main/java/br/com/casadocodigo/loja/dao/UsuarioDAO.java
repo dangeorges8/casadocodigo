@@ -23,7 +23,7 @@ public class UsuarioDAO implements UserDetailsService{
 	private EntityManager manager;
 
 	public Usuario loadUserByUsername(String email) {
-		List<Usuario> usuarios = manager.createQuery("select u from Usuario u where email = :email", Usuario.class)
+		List<Usuario> usuarios = manager.createQuery("select u from Usuario u where u.email = :email", Usuario.class)
 				.setParameter("email", email)
 				.getResultList();
 		
@@ -32,6 +32,16 @@ public class UsuarioDAO implements UserDetailsService{
 		}
 		
 		return usuarios.get(0);
+	}
+	
+	public Usuario find(String email) {
+
+		Usuario usuario = manager
+				.createQuery("select u from Usuario u where u.email = :email", Usuario.class)
+				.setParameter("email", email)
+				.getSingleResult();
+		
+		return usuario;
 	}
 
 	public void gravar(Usuario usuario) {
@@ -47,5 +57,9 @@ public class UsuarioDAO implements UserDetailsService{
 				.createQuery("select u.email from Usuario u", String.class)
 				.getResultList();
 		return listaDeEmails;
+	}
+	
+	public void gravarRoles(Usuario usuario) {
+		
 	}
 }

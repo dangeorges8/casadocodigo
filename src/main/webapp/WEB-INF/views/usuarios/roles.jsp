@@ -12,10 +12,18 @@
 
 	<section id="index-section" class="container middle">
 
-		<h2>Cadastro de Permissões para </h2>
+		<h2>Cadastro de Permissões para ${usuario.nome}</h2>
 		<div class="container">
-			<form action="">
-			</form>
+			<form:form action="${s:mvcUrl('UC#gravarRoles').arg(1,usuario.email).arg(2,usuario.nome).build()}" method="post"
+				commandName="usuario" enctype="multipart/form-data">
+				<div class="form-group">
+					<label><strong>Permissões</strong></label>
+					<c:forEach items="${listaRoles}" var="role">
+						<form:checkbox path="roles" value="${role.nome}"/>${role.nome}
+					</c:forEach>
+					<button type="submit" class="btn btn-primary">Atualizar</button>
+				</div>
+			</form:form>
 		</div>
 	</section>
 
