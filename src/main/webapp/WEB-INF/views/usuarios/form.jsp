@@ -36,7 +36,7 @@
 					<form:input type="password" path="senhaRepetida" class="form-control-sm" />
 					<form:errors path="senha" />
 				</div>
-				<button type="submit" class="btn btn-primary"><fmt:message key="cadastro.cadastrar"/></button>
+				<button type="submit" class="btn btn-outline-primary"><fmt:message key="cadastro.cadastrar"/></button>
 			</form:form>
 		</div>
 	</section>

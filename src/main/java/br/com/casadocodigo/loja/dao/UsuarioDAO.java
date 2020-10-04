@@ -1,7 +1,5 @@
 package br.com.casadocodigo.loja.dao;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -12,7 +10,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.casadocodigo.loja.models.Role;
 import br.com.casadocodigo.loja.models.Usuario;
 
 @Repository
@@ -48,8 +45,13 @@ public class UsuarioDAO implements UserDetailsService{
 		manager.persist(usuario);
 	}
 	
-	public List<Usuario> listar(){
+	public List<Usuario> listarUsuariosComRoles(){
 		return manager.createQuery("select distinct(u) from Usuario u join fetch u.roles", Usuario.class).getResultList();
+	}
+	
+	public List<Usuario> listarUsuariosSemRoles(){
+		return manager.createQuery("select u from Usuario u where not exists(select distinct(us) from Usuario us join us.roles where u.email = us.email)", Usuario.class)
+				.getResultList();
 	}
 	
 	public List<String> listarEmails(){

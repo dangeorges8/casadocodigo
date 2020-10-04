@@ -22,17 +22,25 @@
 				<th>Roles</th>
 				<th></th>
 			</tr>
-			<c:forEach items="${usuarios}" var="usuario">
+			<c:forEach items="${usuariosComRoles}" var="usuarioRole">
 				<tr>
-					<td>${usuario.nome}</td>
-					<td>${usuario.email}</td>
+					<td>${usuarioRole.nome}</td>
+					<td>${usuarioRole.email}</td>
 					<td>
-						<c:forEach items="${usuario.roles}" var="roles" varStatus="loop">
+						<c:forEach items="${usuarioRole.roles}" var="roles" varStatus="loop">
 							${roles.nome}
 							<c:if test="${!loop.last}">,</c:if>
 						</c:forEach>
 					</td>
-					<td><a href="${s:mvcUrl('UC#editarRoles').arg(0, usuario.email).build()}"><img alt="Editar" src="${contextPath}resources/imagens/editar.png"></a></td>
+					<td><a href="${s:mvcUrl('UC#editarRoles').arg(0, usuarioRole.email).build()}"><img alt="Editar" src="${contextPath}resources/imagens/editar.png"></a></td>
+				</tr>
+			</c:forEach>
+			<c:forEach items="${usuariosSemRoles}" var="usuarioSemRole">
+				<tr>
+					<td>${usuarioSemRole.nome}</td>
+					<td>${usuarioSemRole.email}</td>
+					<td> </td>
+					<td><a href="${s:mvcUrl('UC#editarRoles').arg(0, usuarioSemRole.email).build()}"><img alt="Adicionar" src="${contextPath}resources/imagens/adicionar.png"></a></td>
 				</tr>
 			</c:forEach>
 		</table>

@@ -21,7 +21,7 @@
 					<c:forEach items="${listaRoles}" var="role">
 						<form:checkbox path="roles" value="${role.nome}"/>${role.nome}
 					</c:forEach>
-					<button type="submit" class="btn btn-primary">Atualizar</button>
+					<button type="submit" class="btn btn-outline-primary">Atualizar</button>
 				</div>
 			</form:form>
 		</div>
