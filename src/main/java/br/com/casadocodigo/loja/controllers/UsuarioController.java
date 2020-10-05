@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -50,7 +51,9 @@ public class UsuarioController {
 		} else if (result.hasErrors()) {
 			return form(usuario);
 		}
-
+		String senhaCriptografada = new BCryptPasswordEncoder().encode(usuario.getSenha());
+		usuario.setSenha(senhaCriptografada);
+		
 		usuarioDao.gravar(usuario);
 
 		redirectAttributes.addFlashAttribute("message", "Usuário cadastrado com sucesso");
